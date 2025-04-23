@@ -1,0 +1,11 @@
+initial-change: CLEAN
+
+vote:
+  worlds: # List of worlds to check for votes
+    - 'world'
+    - 'world_nether'
+    - 'world_the_end'
+  scheduler:
+    enabled: automatic # Enable or disable the scheduler
+    delay: 20 # Delay in seconds before the vote starts
+    deadline: 10 # Time in seconds to wait for the player to vote
