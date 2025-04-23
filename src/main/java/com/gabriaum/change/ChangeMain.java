@@ -57,9 +57,7 @@ public class ChangeMain extends JavaPlugin {
 
     protected void handleWorld() {
 
-        List<World> worlds = new ArrayList<>(ChangeMain.getInstance().getConfig().getStringList("vote.worlds").stream()
-                .map(Bukkit::getWorld)
-                .toList());
+        List<World> worlds = getWorlds();
 
         if (worlds.isEmpty()) {
             worlds.add(Bukkit.getWorlds().get(0));
@@ -73,5 +71,18 @@ public class ChangeMain extends JavaPlugin {
 
             world.setGameRuleValue("doWeatherCycle", "false");
         }
+    }
+
+    public static List<World> getWorlds() {
+
+        List<World> worlds = new ArrayList<>(ChangeMain.getInstance().getConfig().getStringList("vote.worlds").stream()
+                .map(Bukkit::getWorld)
+                .toList());
+
+        if (worlds.isEmpty()) {
+            worlds.add(Bukkit.getWorlds().get(0));
+        }
+
+        return worlds;
     }
 }

@@ -22,7 +22,7 @@ public class AutomaticVoteScheduler extends BukkitRunnable {
 
         FileConfiguration configuration = ChangeMain.getInstance().getConfig();
 
-        List<Player> players = getWorlds().stream().map(World::getPlayers).findFirst().orElse(null);
+        List<Player> players = ChangeMain.getWorlds().stream().map(World::getPlayers).findFirst().orElse(null);
 
         if (players == null || players.isEmpty()) {
             return;
@@ -67,7 +67,7 @@ public class AutomaticVoteScheduler extends BukkitRunnable {
                 vote.setActualType(expectedType);
                 vote.setExpectedType(ChangeType.getNext(expectedType));
 
-                expectedType.getExecutor().execute(getWorlds());
+                expectedType.getExecutor().execute(ChangeMain.getWorlds());
 
                 sendMessage(ChatColor.GREEN + "The vote has been accepted!");
                 sendMessage(ChatColor.GOLD + "The weather will change to " + ChatColor.AQUA + expectedType.name() + ChatColor.GOLD + "!");
@@ -133,18 +133,5 @@ public class AutomaticVoteScheduler extends BukkitRunnable {
 
             world.getPlayers().forEach(player -> player.sendMessage(message));
         }
-    }
-
-    public static List<World> getWorlds() {
-
-        List<World> worlds = new ArrayList<>(ChangeMain.getInstance().getConfig().getStringList("vote.worlds").stream()
-                .map(Bukkit::getWorld)
-                .toList());
-
-        if (worlds.isEmpty()) {
-            worlds.add(Bukkit.getWorlds().get(0));
-        }
-
-        return worlds;
     }
 }

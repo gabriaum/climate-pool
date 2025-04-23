@@ -29,7 +29,7 @@ bukkit {
     main = "com.gabriaum.change.ChangeMain"
     version = project.version.toString()
     apiVersion = "1.8.8"
-    authors = listOf("gabriaum")
+    author = "gabriaum"
     description = "A simple plugin to change the weather in Minecraft."
 }
 
